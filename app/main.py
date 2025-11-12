@@ -25,11 +25,7 @@ def shop_trip() -> None:
         print(f"{customer.name} has {customer.money} dollars")
         costs = []
         for shop in shops:
-            distance = customer.distance_to(shop.location)
-            fuel_needed = distance * customer.car.fuel_consumption / 100 * 2
-            fuel_cost = fuel_needed * fuel_price
-            products_cost = shop.product_cost(customer.product_cart)
-            total = fuel_cost + products_cost
+            total = customer.trip_cost_to(shop, fuel_price)
             costs.append((shop, total))
             print(f"{customer.name}'s trip "
                   f"to the {shop.name} costs {total:.2f}")
@@ -39,6 +35,7 @@ def shop_trip() -> None:
             customer.location = best_shop.location
             best_shop.sell_products(customer.product_cart, customer.name)
             customer.money -= best_cost
+            customer.location = customer.home_location
             print(f"{customer.name} rides home")
             print(f"{customer.name} now "
                   f"has {round(customer.money, 2)} dollars\n")

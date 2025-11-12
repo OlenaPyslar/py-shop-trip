@@ -28,13 +28,5 @@ class Customer:
         distance = self.distance_to(shop.location)
         fuel_needed = distance * (self.car.fuel_consumption / 100) * 2
         fuel_cost = fuel_needed * fuel_price
-        product_cost = 0
-        for product in self.product_cart:
-            quantity = self.product_cart[product]
-            price = shop.products[product]
-            if price is None:
-                raise KeyError(f"{product} is not sold in {shop.name}")
-            else:
-                product_cost += quantity * price
-        total_cost = fuel_cost + product_cost
+        total_cost = fuel_cost + shop.product_cost(self.product_cart)
         return round(total_cost, 2)
