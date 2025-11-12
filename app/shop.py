@@ -51,7 +51,7 @@ class Shop:
         print(f"Thanks, {customer_name}, for your purchase!")
         print("You have bought:")
         for name, qty in product_cart.items():
-            price = self.products[name]  # або get_price(name)
+            price = self.products[name]
             line_cost = qty * price
             print(f"{qty} {name}{"s" if qty > 1 else ""} "
                   f"for {format_price(line_cost)} dollars")

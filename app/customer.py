@@ -26,7 +26,5 @@ class Customer:
 
     def trip_cost_to(self, shop: Shop, fuel_price: float) -> float:
         distance = self.distance_to(shop.location)
-        fuel_needed = distance * (self.car.fuel_consumption / 100) * 2
-        fuel_cost = fuel_needed * fuel_price
-        total_cost = fuel_cost + shop.product_cost(self.product_cart)
+        total_cost = self.car.get_fuel_cost(distance * 2, fuel_price) + shop.product_cost(self.product_cart)
         return round(total_cost, 2)
